@@ -1,7 +1,7 @@
 package com.zaurtregulov.spring.rest.configuration;
 
 
-import com.zaxxer.hikari.HikariDataSource;
+import org.firebirdsql.ds.FBSimpleDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -22,17 +22,27 @@ public class MyConfig {
   @Bean
   public DataSource dataSource() {
 //    ComboPooledDataSource dataSource = new ComboPooledDataSource();
-    HikariDataSource dataSource = new HikariDataSource();
-    dataSource.setDriverClassName("org.firebirdsql.jdbc.FBDriver");
-    dataSource.setJdbcUrl("jdbc:firebirdsql://localhost:3050/W:/Work_2021/Spring/Spring for beginners (Zaur Tregulov)/spring_course_rest/db/test3.fdb?useSSL=false&amp;serverTimezone=UTC&amp;charSet=utf8");
-    dataSource.setUsername("user");
+//    dataSource.setDriverClass("org.firebirdsql.jdbc.FBDriver");
+//    dataSource.setJdbcUrl("jdbc:firebirdsql://localhost:3050/W:/Work_2021/Spring/Spring for beginners (Zaur Tregulov)/spring_course_rest/db/test3.fdb?useSSL=false&amp;serverTimezone=UTC&amp;charSet=utf8");
+//    dataSource.setUser("user");
+//    dataSource.setPassword("user");
+
+//    HikariDataSource dataSource = new HikariDataSource();
+//    dataSource.setDriverClassName("org.firebirdsql.jdbc.FBDriver");
+//    dataSource.setJdbcUrl("jdbc:firebirdsql://localhost:3050/W:/Work_2021/Spring/Spring for beginners (Zaur Tregulov)/spring_course_rest/db/test3.fdb?useSSL=false&amp;serverTimezone=UTC&amp;charSet=utf8");
+//    dataSource.setUsername("user");
+//    dataSource.setPassword("user");
+
+    FBSimpleDataSource dataSource = new FBSimpleDataSource();
+    dataSource.setDatabase("jdbc:firebirdsql://localhost:3050/W:/Work_2021/Spring/Spring for beginners (Zaur Tregulov)/spring_course_rest/db/test3.fdb");
+    dataSource.setUserName("user");
     dataSource.setPassword("user");
 
     return dataSource;
   }
 
   @Bean
-  public LocalSessionFactoryBean sessionFactory(DataSource dataSource){
+  public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
     LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
     sessionFactory.setDataSource(dataSource);
     sessionFactory.setPackagesToScan("com.zaurtregulov.spring.rest.entity");
@@ -47,7 +57,7 @@ public class MyConfig {
   }
 
   @Bean
-  public HibernateTransactionManager transactionManager(LocalSessionFactoryBean sessionFactory){
+  public HibernateTransactionManager transactionManager(LocalSessionFactoryBean sessionFactory) {
 
     HibernateTransactionManager transactionManager = new HibernateTransactionManager();
     transactionManager.setSessionFactory(sessionFactory.getObject());
