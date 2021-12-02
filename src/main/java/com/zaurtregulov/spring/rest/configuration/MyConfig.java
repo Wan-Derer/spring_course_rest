@@ -1,7 +1,8 @@
 package com.zaurtregulov.spring.rest.configuration;
 
 
-import org.firebirdsql.ds.FBSimpleDataSource;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+//import org.firebirdsql.ds.FBSimpleDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
+import java.beans.PropertyVetoException;
 import java.util.Properties;
 
 @Configuration
@@ -20,12 +22,12 @@ import java.util.Properties;
 public class MyConfig {
 
   @Bean
-  public DataSource dataSource() {
-//    ComboPooledDataSource dataSource = new ComboPooledDataSource();
-//    dataSource.setDriverClass("org.firebirdsql.jdbc.FBDriver");
-//    dataSource.setJdbcUrl("jdbc:firebirdsql://localhost:3050/W:/Work_2021/Spring/Spring for beginners (Zaur Tregulov)/spring_course_rest/db/test3.fdb?useSSL=false&amp;serverTimezone=UTC&amp;charSet=utf8");
-//    dataSource.setUser("user");
-//    dataSource.setPassword("user");
+  public DataSource dataSource() throws PropertyVetoException {
+    ComboPooledDataSource dataSource = new ComboPooledDataSource();
+    dataSource.setDriverClass("org.firebirdsql.jdbc.FBDriver");
+    dataSource.setJdbcUrl("jdbc:firebirdsql://localhost:3050/W:/Work_2021/Spring/Spring for beginners (Zaur Tregulov)/spring_course_rest/db/test3.fdb?useSSL=false&amp;serverTimezone=UTC&amp;charSet=utf8");
+    dataSource.setUser("user");
+    dataSource.setPassword("user");
 
 //    HikariDataSource dataSource = new HikariDataSource();
 //    dataSource.setDriverClassName("org.firebirdsql.jdbc.FBDriver");
@@ -33,10 +35,10 @@ public class MyConfig {
 //    dataSource.setUsername("user");
 //    dataSource.setPassword("user");
 
-    FBSimpleDataSource dataSource = new FBSimpleDataSource();
-    dataSource.setDatabase("jdbc:firebirdsql://localhost:3050/W:/Work_2021/Spring/Spring for beginners (Zaur Tregulov)/spring_course_rest/db/test3.fdb");
-    dataSource.setUserName("user");
-    dataSource.setPassword("user");
+//    FBSimpleDataSource dataSource = new FBSimpleDataSource();
+//    dataSource.setDatabase("jdbc:firebirdsql://localhost:3050/W:/Work_2021/Spring/Spring for beginners (Zaur Tregulov)/spring_course_rest/db/test3.fdb");
+//    dataSource.setUserName("user");
+//    dataSource.setPassword("user");
 
     return dataSource;
   }
