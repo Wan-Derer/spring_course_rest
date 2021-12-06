@@ -58,11 +58,13 @@ public class MyController {
   @DeleteMapping(value = "/employees/{id}", produces = "text/html; charset=utf-8")
   public String deleteEmployee(@PathVariable int id) {
 
-    String name = employeeService.getEmployeeById(id).getSurname();
+    Employee emp = employeeService.getEmployeeById(id);
+
+    if (emp == null) throw new NoSuchEmployeeException("Нет сотрудника с ID = " + id);
 
     employeeService.deleteEmployee(id);
 
-    return "Сотрудник " + name + " погорел";
+    return "Сотрудник " + emp.getSurname() + " погорел";
   }
 
 
