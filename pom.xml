@@ -34,16 +34,15 @@
     </dependency>
 
     <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
-      <version>5.6.1.Final</version>
+      <groupId>net.java.dev.jna</groupId>
+      <artifactId>jna</artifactId>
+      <version>5.10.0</version>
     </dependency>
 
     <dependency>
       <groupId>org.firebirdsql.jdbc</groupId>
       <artifactId>jaybird</artifactId>
       <version>4.0.4.java11</version>
-      <scope>provided</scope>
     </dependency>
 
 <!--    <dependency>-->
@@ -53,6 +52,12 @@
 <!--      <type>pom</type>-->
 <!--      <scope>provided</scope>-->
 <!--    </dependency>-->
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.6.1.Final</version>
+    </dependency>
 
     <dependency>
       <groupId>com.mchange</groupId>
